@@ -1,66 +1,31 @@
-# import random
-#
-#
-# def get_number():
-#     """Get number from user.
-#
-#     Try until user give proper number.
-#
-#     :rtype: int
-#     :return: given number as int
-#     """
-#     while True:
-#         try:
-#             result = int(input("Guess the number: "))
-#             break
-#         except ValueError:
-#             print("It's not a number")
-#
-#     return result
-#
-#
-# def guess_the_number():
-#     """Main function with our game."""
-#     secret_number = random.randint(1, 100)
-#     given_number = get_number()
-#     while given_number != secret_number:
-#         if given_number < secret_number:
-#             print("Too small!")
-#         else:
-#             print("Too big!")
-#         given_number = get_number()
-#     print("You Win!")
-#
-#
-# if __name__ == '__main__':
-#     guess_the_number()
+# Odwróćmy teraz sytuację z pierwszego zadania: ("Gra w zgadywanie liczb").
+# Niech użytkownik pomyśli sobie liczbę z zakresu 1-1000, a komputer będzie zgadywał.
+# Zrobi to maksymalnie w 10 ruchach (pod warunkiem, że gracz nie będzie oszukiwał).
+# Zadaniem gracza będzie udzielanie odpowiedzi "To small", "To big", "You win".
+# Do tego warsztatu dołączony jest schemat blokowy algorytmu. Zaimplementuj go w Pythonie.
 
-
-# Napisz prostą grę w zgadywanie liczb. Komputer musi wylosować liczbę w zakresie 1 – 100. Następnie:
-#
-# Zadać pytanie: "Guess the number: " i pobrać liczbę z klawiatury.
-# Sprawdzić, czy wprowadzony napis, to rzeczywiście liczba i w razie błędu wyświetlić komunikat "It's not a number!", po czym wrócić do pkt. 1
-# Jeśli liczba podana przez użytkownika jest mniejsza niż wylosowana, wyświetlić komunikat "To small!", po czym wrócić do pkt. 1.
-# Jeśli liczba podana przez użytkownika jest większa niż wylosowana, wyświetlić komunikat "To big!", po czym wrócić do pkt. 1.
-# Jeśli liczba podana przez użytkownika jest równa wylosowanej, wyświetlić komunikat "You win!", po czym zakończyć działanie programu.
-
-def guess_no():
-    import random
-
-    b = random.randint(1, 100)
+def guess_2():
+    print('Think of a number from a range 1-1000, and CPU will guess it in 10 attempts max')
+    max = 1000
+    min = 0
+    guess_count = 1
     while True:
-        a = input('Guess the number: ')
-        try:
-            int(a)
-            if int(a) == b:
-                print('You win!')
-                return
-            elif int(a) > b:
-                print('Too big!')
-            else:
-                print('Too small!')
-        except:
-            print('''It's not a number!''')
+        guess = int((max-min)/2) + min
+        print('CPU guess: ' + str(guess))
+        ans = input('type:\nY for correct guess\nM for More than guessed\nL for Less than guessed\n>> ')
+        if ans.upper() == 'Y':
+            print(f'CPU won in {guess_count} tries!\nProtein component is so overestimated in today\'s world...')
+            return
+        elif ans.upper() == 'M':
+            min = guess
+            guess_count += 1
+        elif ans.upper() == 'L':
+            max = guess
+            guess_count += 1
+        else:
+            print('please provide correct feedback')
 
 
-guess_no()
+
+if __name__ == '__main__':
+    guess_2()
